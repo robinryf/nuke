@@ -3,6 +3,7 @@
 // https://github.com/nuke-build/nuke/blob/master/LICENSE
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
@@ -47,7 +48,13 @@ public class PathVariableAttribute : ToolInjectionAttributeBase
     public override object GetValue(MemberInfo member, object instance)
     {
         var name = _pathExecutable ?? member.Name.ToLowerInvariant();
-        return ToolResolver.TryGetEnvironmentTool(name) ??
+        var value = ToolResolver.TryGetEnvironmentTool(name) ??
                ToolResolver.GetPathTool(name);
+        if (value == null)
+        {
+            throw new FileNotFoundException($"Unable to find path variable tool: {name}");
+        }
+
+        return value;
     }
 }

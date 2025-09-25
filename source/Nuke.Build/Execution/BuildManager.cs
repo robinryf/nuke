@@ -83,7 +83,7 @@ internal static class BuildManager
             if (exception is not TargetExecutionException)
             {
                 Log.Verbose(exception, "Target-unrelated exception was thrown");
-                Host.Error(exception.Message);
+                Host.Error(exception.ToString());
             }
 
             return build.ExitCode ??= ErrorExitCode;

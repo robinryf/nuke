@@ -16,18 +16,28 @@ public class GenerateBuildServerConfigurationsAttribute
 {
     public void OnBuildCreated(IReadOnlyCollection<ExecutableTarget> executableTargets)
     {
-        var configurationId = ParameterService.GetParameter<string>(ConfigurationParameterName);
-        if (configurationId == null)
-            return;
+        var configurationArgument = ParameterService.GetParameter<string>(ConfigurationParameterName);
 
-        Assert.NotNull(Build.RootDirectory);
+        if (configurationArgument != null)
+        {
+            var configurationSplit = configurationArgument.Split(',');
 
-        var generator = GetGenerators(Build)
-            .Where(x => x.Id == configurationId)
-            .SingleOrDefaultOrError($"Found multiple {nameof(IConfigurationGenerator)} with same ID '{configurationId}'.")
-            .NotNull("generator != null");
+            foreach (var configurationId in configurationSplit)
+            {
+                var trimmedConfigurationId = configurationId.Trim();
+                if (string.IsNullOrEmpty(trimmedConfigurationId))
+                    continue;
 
-        generator.Generate(executableTargets);
+                Assert.NotNull(Build.RootDirectory);
+
+                var generator = GetGenerators(Build)
+                    .Where(x => x.Id == trimmedConfigurationId)
+                    .SingleOrDefaultOrError($"Found multiple {nameof(IConfigurationGenerator)} with same ID '{configurationId}'.")
+                    .NotNull("generator != null");
+
+                generator.Generate(executableTargets);
+            }
+        }
 
         Environment.Exit(0);
     }

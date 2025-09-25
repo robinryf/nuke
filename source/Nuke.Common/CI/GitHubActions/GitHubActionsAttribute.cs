@@ -203,11 +203,11 @@ public class GitHubActionsAttribute : ConfigurationAttributeBase
             foreach (var artifact in artifacts)
             {
                 yield return new GitHubActionsArtifactStep
-                             {
-                                 Name = artifact.ToString().TrimStart(artifact.Parent.ToString()).TrimStart('/', '\\'),
-                                 Path = Build.RootDirectory.GetUnixRelativePathTo(artifact),
-                                 Condition = PublishCondition
-                             };
+                 {
+                     Name = artifact.ToString().TrimStart(artifact.Parent.ToString()).TrimStart('/', '\\'),
+                     Path = Build.RootDirectory.GetUnixRelativePathTo(artifact),
+                     Condition = PublishCondition
+                 };
             }
         }
     }

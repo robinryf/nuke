@@ -87,6 +87,8 @@ public class GitHubActionsAttribute : ConfigurationAttributeBase
     public bool JobConcurrencyCancelInProgress { get; set; }
 
     public string[] InvokedTargets { get; set; } = new string[0];
+    
+    public string[] InvokedTargetsArguments { get; set; } = new string[0];
 
     public GitHubActionsSubmodules Submodules
     {
@@ -160,7 +162,7 @@ public class GitHubActionsAttribute : ConfigurationAttributeBase
                };
     }
 
-    private IEnumerable<GitHubActionsStep> GetSteps(GitHubActionsImage image, IReadOnlyCollection<ExecutableTarget> relevantTargets)
+    protected virtual IEnumerable<GitHubActionsStep> GetSteps(GitHubActionsImage image, IReadOnlyCollection<ExecutableTarget> relevantTargets)
     {
         yield return new GitHubActionsCheckoutStep
                      {
@@ -185,6 +187,7 @@ public class GitHubActionsAttribute : ConfigurationAttributeBase
                      {
                          BuildCmdPath = BuildCmdPath,
                          InvokedTargets = InvokedTargets,
+                         InvokedTargetsArguments = InvokedTargetsArguments,
                          Imports = GetImports().ToDictionary(x => x.Key, x => x.Value)
                      };
 

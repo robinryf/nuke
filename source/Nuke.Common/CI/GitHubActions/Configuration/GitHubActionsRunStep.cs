@@ -16,12 +16,13 @@ public class GitHubActionsRunStep : GitHubActionsStep
 {
     public string BuildCmdPath { get; set; }
     public string[] InvokedTargets { get; set; }
+    public string[] InvokedTargetsArguments {get; set;}
     public Dictionary<string, string> Imports { get; set; }
 
     public override void Write(CustomFileWriter writer)
     {
         writer.WriteLine("- name: " + $"Run: {InvokedTargets.JoinCommaSpace()}".SingleQuote());
-        writer.WriteLine($"  run: ./{BuildCmdPath} {InvokedTargets.JoinSpace()}");
+        writer.WriteLine($"  run: ./{BuildCmdPath} {InvokedTargets.JoinSpace()} {InvokedTargetsArguments.JoinSpace()}");
 
         if (Imports.Count > 0)
         {

@@ -34,6 +34,11 @@ partial class Build
                 GenerateCode(
                     x,
                     namespaceProvider: x => $"Nuke.Common.Tools.{x.Name}",
-                    sourceFileProvider: x => GitRepository.SetBranch(MasterBranch).GetGitHubBrowseUrl(x.SpecificationFile)));
+                    sourceFileProvider: x =>
+                    {
+                        var path = x.SpecificationFile;
+                        var repoRoot = path.LastIndexOf("/source/", StringComparison.Ordinal);
+                        return path.Substring(repoRoot + 1);
+                    }));
         });
 }

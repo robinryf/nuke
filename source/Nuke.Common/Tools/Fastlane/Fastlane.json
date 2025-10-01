@@ -595,7 +595,7 @@
             "help": "The track to promote to. The default available tracks are: production, beta, alpha, internal."
           },
           {
-            "name": "TrackToPromote",
+            "name": "PromotedTrackReleaseStatus",
             "type": "GooglePlayStoreReleaseStatus",
             "format": "--track_promote_release_status {value}",
             "help": "Promoted track release status (used when promoting a track) - valid values are completed, draft, halted, inProgress."
@@ -643,7 +643,7 @@
             "help": "Indicates that the changes in this edit will not be reviewed until they are explicitly sent for review from the Google Play Console UI."
           },
           {
-            "name": "ChangesNotSentForReview",
+            "name": "RescueChangesNotSentForReview",
             "type": "bool",
             "format": "--rescue_changes_not_sent_for_review",
             "help": "Indicates that the changes in this edit will not be reviewed until they are explicitly sent for review from the Google Play Console UI."

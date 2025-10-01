@@ -25,7 +25,7 @@ public abstract class ConfigurationAttributeBase : Attribute, IConfigurationGene
     public string Id => HostName + (string.IsNullOrEmpty(IdPostfix) ? string.Empty : $"_{IdPostfix}");
     public virtual string IdPostfix => string.Empty;
 
-    public bool AutoGenerate { get; set; } = true;
+    public bool AutoGenerate { get; set; } = false;
     public abstract Type HostType { get; }
     public abstract AbsolutePath ConfigurationFile { get; }
     public abstract IEnumerable<AbsolutePath> GeneratedFiles { get; }

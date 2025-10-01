@@ -1,4 +1,4 @@
-// Generated from https://github.com/nuke-build/nuke/blob/master/source/Nuke.Common/Tools/GitVersion/GitVersion.json
+// Generated from source/Nuke.Common/Tools/GitVersion/GitVersion.json
 
 using JetBrains.Annotations;
 using Newtonsoft.Json;

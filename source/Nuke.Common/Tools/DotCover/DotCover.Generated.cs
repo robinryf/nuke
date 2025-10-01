@@ -1,4 +1,4 @@
-// Generated from https://github.com/nuke-build/nuke/blob/master/source/Nuke.Common/Tools/DotCover/DotCover.json
+// Generated from source/Nuke.Common/Tools/DotCover/DotCover.json
 
 using JetBrains.Annotations;
 using Newtonsoft.Json;

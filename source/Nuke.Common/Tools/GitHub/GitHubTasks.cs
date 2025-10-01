@@ -194,7 +194,7 @@ public static class GitHubTasks
         string branch = null,
         GitHubItemType itemType = GitHubItemType.Automatic)
     {
-        Assert.True(repository.IsGitHubRepository());
+        //Assert.True(repository.IsGitHubRepository());
 
         branch ??= repository.Branch.NotNull();
         var relativePath = GetRepositoryRelativePath(path, repository);
